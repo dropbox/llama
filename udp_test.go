@@ -12,8 +12,8 @@ func TestUnpackUdpData(t *testing.T) {
 	data := UdpData{
 		Signature: signature,
 	}
-	// staticcheck:  this value of err is never used (SA4006)
 	bytes, err := PackUdpData(&data)
+	HandleMinorError(err)
 	unpacked, err := UnpackUdpData(bytes)
 	if err != nil {
 		t.Error("Was unable to unpack data successfully")
@@ -25,8 +25,7 @@ func TestUnpackUdpData(t *testing.T) {
 
 	// Now verify that bad data doesn't work
 	badData := []byte{1, 2, 3, 4, 5}
-	// staticcheck:  this value of unpacked is never used (SA4006)
-	unpacked, err = UnpackUdpData(badData)
+	_, err = UnpackUdpData(badData)
 	if err == nil {
 		t.Error("No error returned for bad data")
 	}

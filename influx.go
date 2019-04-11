@@ -95,12 +95,19 @@ func (dp *DataPoint) SetMeasurement(s string) {
 	dp.Measurement = s
 }
 
-// New provides a new DataPoint populated with values in s and t.
-func NewDataPoint(s *Summary, t Tags) *DataPoint {
-	dp := &DataPoint{
-		Tags:   make(Tags, 0),             // Also to avoid nil
-		Fields: make(map[string]IDBFloat64, 0), // Also to avoid nil
+// NewDataPoint provides an empty and usable DataPoint.
+func NewDataPoint() *DataPoint {
+	return &DataPoint{
+		//nolint:gosimple
+		Tags:   make(Tags, 0), // To avoid JSON issues with nil
+		//nolint:gosimple
+		Fields: make(map[string]IDBFloat64, 0), // To avoid JSON issues with nil
 	}
+}
+
+// NewDataPointFromSummary provides a new DataPoint populated with values in s and t.
+func NewDataPointFromSummary(s *Summary, t Tags) *DataPoint {
+	dp := NewDataPoint()
 	dp.FromSummary(s)
 	dp.UpdateTags(t)
 	return dp
@@ -108,11 +115,12 @@ func NewDataPoint(s *Summary, t Tags) *DataPoint {
 
 // NewFromSummaries allows bulk operations against New by providing a slice of
 // summaries and map of Tags (t).
-func NewFromSummaries(summaries []*Summary, t TagSet) []*DataPoint {
-	dps := make([]*DataPoint, 0) // Need to do it this way to avoid nil if empty
+func NewDataPointsFromSummaries(summaries []*Summary, t TagSet) []*DataPoint {
+	//nolint:gosimple
+	dps := make([]*DataPoint, 0) // To avoid JSON issues with nil
 	for _, s := range summaries {
 		dstTags := t[s.Pd.DstIP.String()]
-		dps = append(dps, NewDataPoint(s, dstTags))
+		dps = append(dps, NewDataPointFromSummary(s, dstTags))
 	}
 	return dps
 }

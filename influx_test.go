@@ -21,9 +21,8 @@ func TestSetFieldFloat(t *testing.T) {
 	}
 }
 
-// deadcode: FromSummary is grandfathered in as legacy code
-func FromSummary(t *testing.T) {
-	dp := &DataPoint{}
+func TestFromSummary(t *testing.T) {
+	dp := NewDataPoint()
 	s := &Summary{
 		Pd: &PathDist{
 			SrcIP: net.ParseIP("127.0.0.1"),
@@ -47,20 +46,17 @@ func FromSummary(t *testing.T) {
 		t.Error("Time is not being set")
 	}
 	// Check measurement
-	if dp.Measurement != "probe_stats" {
+	if dp.Measurement != "raw_stats" {
 		t.Error("Measurement is not being set")
 	}
 	// Make sure a couple of fields are being set
-	if dp.Fields["rtt_avg"] != 100.0 || dp.Fields["lost"] != 2 {
+	if dp.Fields["rtt"] != 100.0 || dp.Fields["lost"] != 2 {
 		t.Error("Fields are not being populated")
 	}
 }
 
 func TestFromPD(t *testing.T) {
-	dp := &DataPoint{
-		Tags:   make(Tags, 0),             // Also to avoid nil
-		Fields: make(map[string]IDBFloat64, 0), // Also to avoid nil
-	}
+	dp := NewDataPoint()
 	pd := &PathDist{
 		SrcIP: net.ParseIP("127.0.0.1"),
 		DstIP: net.ParseIP("172.16.10.10"),
@@ -81,10 +77,7 @@ func TestFromPD(t *testing.T) {
 }
 
 func TestUpdateTags(t *testing.T) {
-	dp := &DataPoint{
-		Tags:   make(Tags, 0),             // Also to avoid nil
-		Fields: make(map[string]IDBFloat64, 0), // Also to avoid nil
-	}
+	dp := NewDataPoint()
 	tgs := Tags{
 		"first":  "one",
 		"second": "two",
@@ -96,10 +89,7 @@ func TestUpdateTags(t *testing.T) {
 }
 
 func TestSetTime(t *testing.T) {
-	dp := &DataPoint{
-		Tags:   make(Tags, 0),             // Also to avoid nil
-		Fields: make(map[string]IDBFloat64, 0), // Also to avoid nil
-	}
+	dp := NewDataPoint()
 	ut := time.Unix(1504654423, 0)
 	dp.SetTime(ut)
 	if dp.Time != ut {
@@ -107,7 +97,7 @@ func TestSetTime(t *testing.T) {
 	}
 }
 
-func TestNewDataPoint(t *testing.T) {
+func TestNewDataPointFromSummary(t *testing.T) {
 	// The bulk of this is tested in TestFromSummary and TestUpdateTags
 	tgs := Tags{
 		"first":  "one",
@@ -126,7 +116,7 @@ func TestNewDataPoint(t *testing.T) {
 		Loss:   0.4,
 		TS:     time.Now(),
 	}
-	dp := NewDataPoint(s, tgs)
+	dp := NewDataPointFromSummary(s, tgs)
 	// Other functions will do more detailed checks, just make sure things
 	// are getting set.
 	if dp.Tags["first"] != "one" || dp.Tags["second"] != "two" {
@@ -140,7 +130,7 @@ func TestNewDataPoint(t *testing.T) {
 	}
 }
 
-func TestNewFromSummaries(t *testing.T) {
+func TestNewDataPointsFromSummaries(t *testing.T) {
 	s := []*Summary{
 		&Summary{Pd: &PathDist{}},
 		&Summary{
@@ -159,7 +149,7 @@ func TestNewFromSummaries(t *testing.T) {
 			"mytag": "myvalue",
 		},
 	}
-	dps := NewFromSummaries(s, tgs)
+	dps := NewDataPointsFromSummaries(s, tgs)
 	if len(dps) != 3 {
 		t.Error("Expected 3 data points, got", len(dps))
 	}

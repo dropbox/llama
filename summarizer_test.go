@@ -76,7 +76,6 @@ func TestSummarizeSet(t *testing.T) {
 
 func TestStore(t *testing.T) {
 	// This is basically just a loop that reads from a channel
-	return
 }
 
 func TestAddResult(t *testing.T) {

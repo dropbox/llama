@@ -187,7 +187,7 @@ func (p *Port) recv() {
 			id := string(udpData.Signature[:])
 			// TODO(dmar): Should be doing something about this error
 			cValue, found := p.cache.Get(id)
-			if found == false {
+			if !found {
 				// This means it expired already or doesn't exist
 				// so there's nothing to do.
 				// TODO(dmar): Log/stat on occurrences of this

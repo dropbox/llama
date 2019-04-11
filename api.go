@@ -25,7 +25,7 @@ func (api *API) InfluxHandler(rw http.ResponseWriter, request *http.Request) {
 	log.Println("Found", len(summaries), "data points")
 	// Convert the summaries to influx datapoints
 	api.mutex.RLock()
-	ifdp := NewFromSummaries(summaries, api.ts)
+	ifdp := NewDataPointsFromSummaries(summaries, api.ts)
 	api.mutex.RUnlock()
 	// And unlock the cache
 	api.summarizer.CMutex.RUnlock()
@@ -39,7 +39,8 @@ func (api *API) InfluxHandler(rw http.ResponseWriter, request *http.Request) {
 	}
 
 	// Send back the response
-	rw.Write(asJson)
+	_, err = rw.Write(asJson)
+	HandleMinorError(err)
 }
 
 // StatusHandler acts as a back healthcheck and simply returns 200 OK.

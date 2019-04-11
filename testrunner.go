@@ -18,8 +18,6 @@ type TestRunner struct {
 	stop    chan bool
 	mutex   sync.RWMutex
 	targets []*net.UDPAddr
-	// deadcode: running is grandfathered in as legacy code
-	running bool
 }
 
 // Run starts the TestRunner and begins cycling through targets.

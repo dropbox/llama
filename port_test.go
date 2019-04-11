@@ -13,14 +13,6 @@ var exampleProbe = Probe{
 	Tos:   byte(0),
 }
 
-// deadcode: examplePathDist is grandfathered in as legacy code
-var examplePathDist = PathDist{
-	SrcIP:   net.ParseIP("0.0.0.0"),
-	SrcPort: 5000,
-	DstIP:   net.ParseIP("127.0.0.1"),
-	DstPort: 5001,
-	Proto:   "udp",
-}
 var exampleUDPAddr, _ = net.ResolveUDPAddr("udp", "127.0.0.1:0")
 var exampleUDPAddrChan = make(chan *net.UDPAddr)
 var exampleBoolChan = make(chan bool)
@@ -29,11 +21,11 @@ var exampleProbeChan = make(chan *Probe)
 /*
    Port tests
 */
-func TestsrcPD(t *testing.T) {
+func TestSrcPD(t *testing.T) {
 	// TODO(dmar): This will need some mocking in order to be build safe.
 }
 
-func Testpd(t *testing.T) {
+func TestPd(t *testing.T) {
 	// TODO(dmar): This will need some mocking in order to be build safe.
 }
 
@@ -49,7 +41,7 @@ func TestRecv(t *testing.T) {
 	// TODO(dmar): This will need some mocking in order to be build safe.
 }
 
-func Testdone(t *testing.T) {
+func TestDone(t *testing.T) {
 	// This is basically just IfaceToProbe and passing to a channel, so
 	// doesn't really need testing.
 }

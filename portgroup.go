@@ -118,21 +118,11 @@ func (pg *PortGroup) run() {
 // here, similar to Add and Del.
 func (pg *PortGroup) mux(addr *net.UDPAddr) {
 	for _, c := range pg.ports {
-		select {
-		case c <- addr:
-			continue // This is good/normal
-			/* TODO(dmar): Commenting this out for now as it can result in
-			                    erratic sending behavior and math that doesn't add up.
-			                    However in the future this behavior needs to be improved.
-					default:
-						// TODO(dmar): Keep a stat on this in the future. This means the
-						//      channel is getting backed up and the sender can't send fast
-						//      enough. Generally a higher-level rate limiter should
-						//      address this problem. Allowing it to block or using a
-						//      timeout would jam up the whole system.
-						continue // This is ungood
-			*/
-		}
+		// TODO(dmar): Update this with a select and default in the future
+		//     if we want to track cases where something breaks here.
+		//     Tried it before, but apparently hit some weird issues.
+		c <- addr
+		continue
 	}
 }
 

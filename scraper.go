@@ -149,7 +149,8 @@ func (s *Scraper) Run() {
 		wg.Add(1)
 		go func(c Client) {
 			defer wg.Done()
-			s.run(c)
+			err := s.run(c)
+			HandleMinorError(err)
 		}(collector)
 	}
 	wg.Wait()
