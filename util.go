@@ -85,10 +85,10 @@ func HandleFatalError(err error) {
 // provided size in bytes.
 // TODO(dmar): Validate and replace this with a simple call to conn.SetReadBuffer
 func SetRecvBufferSize(conn *net.UDPConn, size int) {
-    file, err := conn.File()
-    defer FileCloseHandler(file)
-    HandleError(err)
-    err = syscall.SetsockoptInt(int(file.Fd()), syscall.SOL_SOCKET,
-        syscall.SO_RCVBUF, size)
-    HandleError(err)
+	file, err := conn.File()
+	defer FileCloseHandler(file)
+	HandleError(err)
+	err = syscall.SetsockoptInt(int(file.Fd()), syscall.SOL_SOCKET,
+		syscall.SO_RCVBUF, size)
+	HandleError(err)
 }

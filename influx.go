@@ -22,7 +22,7 @@ func (n IDBFloat64) MarshalJSON() ([]byte, error) {
 // DataPoint represents a single "point" of data for InfluxDB.
 type DataPoint struct {
 	Fields      map[string]IDBFloat64 `json:"fields"`
-	Tags        Tags             `json:"tags"`
+	Tags        Tags                  `json:"tags"`
 	Time        time.Time             `json:"time"`
 	Measurement string                `json:"measurement"`
 }
@@ -99,7 +99,7 @@ func (dp *DataPoint) SetMeasurement(s string) {
 func NewDataPoint() *DataPoint {
 	return &DataPoint{
 		//nolint:gosimple
-		Tags:   make(Tags, 0), // To avoid JSON issues with nil
+		Tags: make(Tags, 0), // To avoid JSON issues with nil
 		//nolint:gosimple
 		Fields: make(map[string]IDBFloat64, 0), // To avoid JSON issues with nil
 	}

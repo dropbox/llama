@@ -1,9 +1,9 @@
 package llama
 
 import (
+	"golang.org/x/time/rate"
 	"net"
 	"testing"
-	"golang.org/x/time/rate"
 )
 
 var exampleCallbackChan = make(chan *Probe)

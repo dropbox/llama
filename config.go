@@ -88,9 +88,9 @@ type TestsConfig []TestConfig
 //      data being included in this config. Most of this can come from a base,
 //      and then be populated by MDB queries.
 type TargetConfig struct {
-	IP   string    `yaml:"ip"`
-	Port int64     `yaml:"port"`
-	Tags Tags `yaml:"tags"`
+	IP   string `yaml:"ip"`
+	Port int64  `yaml:"port"`
+	Tags Tags   `yaml:"tags"`
 }
 
 // AddrString converts the tc into a string formated "IP:port" combo.

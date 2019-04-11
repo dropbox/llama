@@ -8,15 +8,15 @@ import (
 // Result defines characteristics of a single completed Probe.
 type Result struct {
 	Pd   *PathDist // Characteristics that make this path unique
-	RTT  uint64         // Round trip time in nanoseconds
-	Done uint64         // When the test completed (was received by Port) in ns
-	Lost bool           // If the Probe was lost and never actually completed
+	RTT  uint64    // Round trip time in nanoseconds
+	Done uint64    // When the test completed (was received by Port) in ns
+	Lost bool      // If the Probe was lost and never actually completed
 }
 
 // ResultHandler is a post-processor for Probes and converts them to Results.
 type ResultHandler struct {
-	in   chan *Probe // Probes come in
-	out  chan *Result     // Results come out
+	in   chan *Probe  // Probes come in
+	out  chan *Result // Results come out
 	stop chan bool
 }
 

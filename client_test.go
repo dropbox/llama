@@ -2,9 +2,9 @@
 package llama
 
 import (
-	"testing"
 	"net/http"
 	"net/http/httptest"
+	"testing"
 
 	gocheck "gopkg.in/check.v1"
 )
@@ -83,7 +83,6 @@ func (s *ClientSuite) TearDownSuite(c *gocheck.C) {
 
 func (s *ClientSuite) SetUpTest(c *gocheck.C) {
 }
-
 
 func (s *ClientSuite) TestGetPoints(c *gocheck.C) {
 	points, err := s.client.GetPoints()

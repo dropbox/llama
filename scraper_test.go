@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type MockIfdbClient struct{
+type MockIfdbClient struct {
 	influxdb_client.Client
 }
 

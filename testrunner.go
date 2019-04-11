@@ -2,11 +2,11 @@ package llama
 
 import (
 	"context"
+	"golang.org/x/time/rate"
 	"log"
 	"net"
 	"sync"
 	"time"
-	"golang.org/x/time/rate"
 )
 
 // TestRunner repeatedly runs through a list of targets and passes them down

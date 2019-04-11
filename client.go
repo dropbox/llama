@@ -4,8 +4,8 @@ package llama
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"net/http"
 )
 
 /*

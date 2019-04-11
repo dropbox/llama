@@ -7,7 +7,6 @@ import (
 
 	"golang.org/x/sys/unix" // The successor to syscall
 	"net"
-
 )
 
 type UdpData struct {
