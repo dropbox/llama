@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/dropbox/go-llama"
 	"flag"
+	"github.com/dropbox/go-llama"
 	"golang.org/x/sys/unix"
 	"log"
 	"os"

@@ -2,11 +2,11 @@
 package main
 
 import (
-	"github.com/dropbox/go-llama"
 	"flag"
+	"github.com/dropbox/go-llama"
 	"log"
-	"time"
 	"strings"
+	"time"
 )
 
 // Flags
