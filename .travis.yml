@@ -15,13 +15,10 @@ go:
 # of that when using modules.
 install: true
 
-# TODO(dmar): Cleanup the existing lint issues before enabling this
-# Make sure we have golangci-lint for linting below
-# before_script:
-#  - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
+before_script:
+ - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
 
 script:
-# See above, enable when ready
-# - golangci-lint run
+ - golangci-lint run
  - go build
  - go test -v -race ./...
