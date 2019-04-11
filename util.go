@@ -27,10 +27,7 @@ const (
 // This should be unique enough for short-lived cases, but as it's only a
 // partial UUID4.
 func NewID() string {
-	fullUUID, err := uuid.NewV4()
-	// TODO(dmar): Unsure what conditions might cause this to fail. Adding
-	//     basic handling for now as part of the update.
-	HandleError(err)
+	fullUUID := uuid.NewV4()
 	last10 := fullUUID[len(fullUUID)-10:]
 	return string(last10)
 }
