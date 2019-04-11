@@ -1,0 +1,23 @@
+# Simple configuration example using the legacy/limited format
+# This generally follows the format of:
+# ```
+# <ip-address>:
+#   <tag>: <value>
+# ```
+# Repeated for each target. Tags are then exposed in the summarized results.
+127.0.0.1:
+    dst_hostname: localhost
+    dst_region: west
+    dst_service: my-service
+    my_tag: foobar
+    src_hostname: localhost
+    src_region: west
+127.0.0.2:
+    dst_hostname: localhost
+    dst_region: west
+    dst_service: my-service
+    my_tag: foo
+    src_hostname: other-host
+    src_region: east
+127.0.0.3:
+    foo: bar

@@ -1,0 +1,84 @@
+# More complex configuration example using the full format.
+# This style provides more fine grained control of the collector's operation.
+
+# Controls how often test results are aggregated/summarized.
+# Only the latest summary is kept and available via the API.
+summarization:
+    interval:   30
+    handlers:   2
+
+# Controls how the summarized data exposed in the REST API
+# under /influxdata
+api:
+    bind:   0.0.0.0:5000
+
+# Controls how ports are setup for sending probes.
+# The port number used is selected by the OS at runtime.
+ports:
+    default:
+        ip:         0.0.0.0
+        port:       0
+        tos:        0
+        timeout:    1000
+
+# Port groups create groupings of ports, as defined above.
+# These are then used in tests. Count determines how many
+# instances of the port are created and used in parallel.
+port_groups:
+    default:
+        - port:     default
+          count:    4
+
+# Used by tests to limit the rate at which probes are sent.
+# `cps` is cycles per second and defines the number of probes
+# sent per second to each target in a test. This applies to the
+# port group, but is not port aware. Thus a limit of 4.0
+# with a port group having a count of 1 esults in 4 probes per
+# second to each target. A port group having a count of 4 would
+# result in 16 probes per second to each target (4 ports at 4
+# per second).
+rate_limits:
+    default:
+        cps:    4.0
+
+# Define how, where, and how many probes a collector should
+# be sending. Tests combine the other configuration attributes
+# to build the overall pipeline. If desired, multiple tests
+# can be created with different parameters. However they
+# are summarized together.
+tests:
+    - targets:      default
+      port_group:   default
+      rate_limit:   default
+
+# Defines where probes should be sent based on IP and port.
+# This should be where a reflector is listening.
+# Tags are key-value pairs which are made available with
+# the summarized results in the API. These are useful for
+# marking individual hosts and their physical groupings.
+# At present, tags used to identify the source must be
+# included for each target.
+targets:
+    default:
+        - ip:   127.0.0.1
+          port: 8100
+          tags:
+            dst_hostname: localhost
+            dst_region: west
+            dst_service: my-service
+            my_tag: foobar
+            src_hostname: localhost
+            src_region: west
+        - ip:   127.0.0.2
+          port: 8100
+          tags:
+            dst_hostname: localhost
+            dst_region: west
+            dst_service: my-service
+            my_tag: foo
+            src_hostname: other-host
+            src_region: east
+        - ip:   127.0.0.3
+          port: 8100
+          tags:
+            foo: bar
