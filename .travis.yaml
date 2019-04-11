@@ -1,0 +1,27 @@
+dist: xenial
+
+language: go
+
+env:
+ - GO111MODULE=on
+
+go:
+ - 1.11.x
+ - stable
+ - tip
+
+
+# Don't do `go get` for deps since the build/test phases take care
+# of that when using modules.
+install: true
+
+# TODO(dmar): Cleanup the existing lint issues before enabling this
+# Make sure we have golangci-lint for linting below
+# before_script:
+#  - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
+
+script:
+# See above, enable when ready
+# - golangci-lint run
+ - go build
+ - go test -v -race ./...
