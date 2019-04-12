@@ -1,7 +1,7 @@
 package llama
 
 import (
-	pb "github.com/dropbox/go-llama/proto"
+	pb "github.com/dropbox/llama/proto"
 	"golang.org/x/time/rate"
 	"log"
 	"net"

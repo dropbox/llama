@@ -3,7 +3,7 @@ package main
 
 import (
 	"flag"
-	"github.com/dropbox/go-llama"
+	"github.com/dropbox/llama"
 	"log"
 	"strings"
 	"time"

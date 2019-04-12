@@ -1,4 +1,4 @@
-module github.com/dropbox/go-llama
+module github.com/dropbox/llama
 
 go 1.12
 

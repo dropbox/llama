@@ -525,7 +525,7 @@ var (
 	ErrIntOverflowLlama   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("github.com/dropbox/go-llama/proto/llama.proto", fileDescriptorLlama) }
+func init() { proto.RegisterFile("github.com/dropbox/llama/proto/llama.proto", fileDescriptorLlama) }
 
 var fileDescriptorLlama = []byte{
 	// 197 bytes of a gzipped FileDescriptorProto

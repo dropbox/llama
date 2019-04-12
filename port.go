@@ -11,7 +11,7 @@ import (
 
 	gocache "github.com/patrickmn/go-cache"
 
-	pb "github.com/dropbox/go-llama/proto"
+	pb "github.com/dropbox/llama/proto"
 )
 
 // Port represents a socket and its associated caching, inputs, and outputs.

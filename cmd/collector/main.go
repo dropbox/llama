@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"github.com/dropbox/go-llama"
+	"github.com/dropbox/llama"
 	"golang.org/x/sys/unix"
 	"log"
 	"os"

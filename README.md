@@ -24,9 +24,9 @@ If you're looking to get started quickly with a basic setup that doesn't involve
 
 In your Go development environment, in separate windows:
 
-- `go run github.com/dropbox/go-llama/cmd/reflector`
-- `go run github.com/dropbox/go-llama/cmd/collector`
-- `go run github.com/dropbox/go-llama/cmd/scraper`
+- `go run github.com/dropbox/llama/cmd/reflector`
+- `go run github.com/dropbox/llama/cmd/collector`
+- `go run github.com/dropbox/llama/cmd/scraper`
 
 If you want to run each of these on a separate machine/instance, after distributing the binaries created with `go build`, customizing the flags as needed:
 
