@@ -20,6 +20,6 @@ before_script:
 
 script:
  - golangci-lint run
- - ! gofmt -d . 2>&1 | read || echo "Please run 'go fmt .'"
+ - diff -u <(echo -n) <(gofmt -d ./)
  - go build
  - go test -v -race ./...
