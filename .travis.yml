@@ -15,11 +15,13 @@ go:
 # of that when using modules.
 install: true
 
-before_script:
- - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
+# TODO(dmar): Disabling this for now, to avoid hitting Google rate limits
+#     while evaluating auth solutions.
+# before_script:
+#  - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
 
 script:
- - golangci-lint run
+#  - golangci-lint run
  - diff -u <(echo -n) <(gofmt -d ./)
  - go build
  - go test -v -race ./...
