@@ -51,3 +51,4 @@ At this time, we're not ready for external contributors. Once we have a v1.0.0 r
 * Inspired by: <https://www.youtube.com/watch?v=N0lZrJVdI9A>
     * With slides: <https://www.nanog.org/sites/default/files/Lapukhov_Move_Fast_Unbreak.pdf>
 * Concepts borrowed from: <https://github.com/facebook/UdpPinger/>
+* Looking for the legacy Python version?: https://github.com/dropbox/llama-archive
