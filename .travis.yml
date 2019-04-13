@@ -3,25 +3,26 @@ dist: xenial
 language: go
 
 env:
- - GO111MODULE=on
+  # These need to be on the same line to apply to the same build(s)
+  - GO111MODULE=on GOFLAGS='-mod=vendor'
 
 go:
- - 1.11.x
- - stable
- - tip
-
+  - 1.11.x
+  - stable
+  - tip
 
 # Don't do `go get` for deps since the build/test phases take care
 # of that when using modules.
 install: true
 
-# TODO(dmar): Disabling this for now, to avoid hitting Google rate limits
-#     while evaluating auth solutions.
-# before_script:
-#  - go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.16.0
+before_script:
+# Install the linter, but don't use go get because Google rate limits
+# See https://github.com/golangci/golangci-lint#ci-installation
+  - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
 
 script:
-#  - golangci-lint run
- - diff -u <(echo -n) <(gofmt -d ./)
- - go build
- - go test -v -race ./...
+  - golangci-lint run
+  # If any files outside of the vendor directory require formatting fixes, fail
+  - if [ -n "$(gofmt -l . | grep -v 'vendor')" ]; then echo "Please run 'go fmt ./...'"; false; fi
+  - go build
+  - go test -v -race ./...
