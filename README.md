@@ -1,6 +1,6 @@
 # LLAMA
 
-LLAMA is a library for testing and measuring network loss and latency between distributed endpoints.
+LLAMA (Loss and LAtency MAtrix) is a library for testing and measuring network loss and latency between distributed endpoints.
 
 It does this by sending UDP datagrams/probes from **collectors** to **reflectors** and measuring how long it takes for them to return, if they return at all. UDP is used to provide ECMP hashing over multiple paths (a win over ICMP) without the need for setup/teardown and per-packet granularity (a win over TCP).
 
